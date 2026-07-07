@@ -104,7 +104,7 @@ p{margin:0 0 15px}
 .arch2 .lr{display:grid;grid-template-columns:96px 1fr;gap:4px 14px;padding:9px 0;border-top:1px dashed var(--line-2);align-items:start}
 .arch2 .ll{font-family:var(--mono);font-size:12px;color:var(--faint);padding-top:3px;line-height:1.4}
 .arch2 .chips{display:flex;flex-wrap:wrap;gap:5px}
-.arch2 .ch{font-family:var(--mono);font-size:12px;background:var(--accent-soft);color:var(--accent-ink);border-radius:5px;padding:2px 7px;white-space:nowrap}
+.arch2 .ch{font-family:var(--mono);font-size:12px;background:var(--accent-soft);color:var(--accent-ink);border-radius:5px;padding:2px 7px;max-width:100%;word-break:keep-all;overflow-wrap:anywhere}
 .arch2 .ch.k{background:transparent;border:1px dashed var(--line);color:var(--muted)}
 .arch2 .inv{font-family:var(--mono);font-size:12px;color:var(--faint);padding:10px 0 8px;border-top:1px solid var(--line-2);margin-top:4px}
 
@@ -201,10 +201,10 @@ footer .name{color:var(--ink);font-weight:600}
   <div class="item">
     <div class="top"><h3>agent-receipt</h3><span class="kind">AI 감사·검증 인프라 · npm 공개</span></div>
     <div class="row"><span class="k">문제</span><span class="v">AI가 "커밋 X가 이 파일을 고쳤다", "이 근거는 출처에 있다"고 말할 때, 그걸 믿을 수 있나? 검토가 곧 다시 사람 일이 된다.</span></div>
-    <div class="row"><span class="k">만든 것</span><span class="v">AI의 산출물과 보고를 <b>결정론적 검사 15종</b>(인용·수치 재계산·범위·git 이력·해시·서명 등)으로 대조하고, 해시체인 원장에 감사증적으로 남겨 변조를 탐지. LLM이 LLM을 심사하지 않아 같은 입력이면 언제나 같은 판정 → CI 게이트가 됨. v0.20부터 세션을 <b>4값 판정</b>(PASS·경고·FAIL·미완, 게이트지 점수 아님)으로 닫고, <b>승인·반려 기록</b>과 받은 쪽 <b>원클릭 재검증(verify-proof)</b>까지, 영수증이 '검토가 끝난 문서'가 됩니다.</span></div>
+    <div class="row"><span class="k">만든 것</span><span class="v">AI의 산출물과 보고를 <b>결정론적 검사 15종</b>(인용·수치 재계산·범위·git 이력·해시·서명 등)으로 대조하고, 해시체인 원장에 감사증적으로 남겨 변조를 탐지합니다. LLM이 LLM을 심사하지 않으므로 같은 입력에는 언제나 같은 판정이 나오고, 그래서 CI 게이트로 쓸 수 있습니다. v0.20부터 세션을 <b>4값 판정</b>(PASS·경고·FAIL·미완, 게이트지 점수 아님)으로 닫고, <b>승인·반려 기록</b>과 받은 쪽 <b>원클릭 재검증(verify-proof)</b>까지, 영수증이 '검토가 끝난 문서'가 됩니다.</span></div>
     <div class="row"><span class="k">설계</span><span class="v"><b>전표 → 장부 → 재무제표 → 회계감사 → 세무·컨설팅</b>의 회계 순환을 그대로 시스템 4층으로 옮겨 설계. 회계를 공부한 사람이라 나올 수 있던 아키텍처입니다.</span></div>
     <div class="row"><span class="k">기능<br>(v0.20)</span><span class="v"><b>세션 계약→판정→검토</b>: 4값 판정(규칙 12종 명문·경고 자동 승격 없음·<code>fail_on_done</code> CI 게이트) → <b>10초 요약 증거 페이지</b>(계약을 한/영 문장으로·리뷰어가 읽는 순서 4버킷·세션 타임라인·--client 축약/--bundle 보존) → <b>승인·반려 기록</b>(review) → <b>inbox</b> 상태판(프리셋 필터) → 받은 쪽 <b>원클릭 재검증</b>(verify-proof). <b>근거 검증</b>: 15종 결정론 검사+증거등급 A/B/C+보류, 검사기 자신을 재는 <b>bench</b>(정밀·재현율·N회 재현성), LLM 분해 브릿지(호출 0). <b>비용 감사</b>: 실사용량 세션 비용+'왜 비쌌나' 구성요소 분해+모델치환 탐지. <b>통제·봉인</b>: 실시간 가드(금지 경로·push/publish 행위 클래스·opt-in)·해시체인+<b>Merkle 투명로그</b>·Rekor 제3자 봉인·in-toto 서명(predicate --sign)·규제 크로스워크(EU AI Act·SOC2·ISO42001)·GitHub Action PR 코멘트·OTel·SDK·Cursor(WSL 브리지).</span></div>
-    <div class="row"><span class="k">회계 예제</span><span class="v">AI가 만든 분개의 <b>대차평균(차변=대변)과 근거 인용</b>을 결정론으로 검증하는 예제, 결정론 검증을 회계에 적용해 본 것으로, <span class="lim">범위: 대차평균과 근거 대조, 전체 분개 검증·연결조정 자동화는 다음 과제로 남겨 둡니다.</span></span></div>
+    <div class="row"><span class="k">회계 예제</span><span class="v">AI가 만든 분개의 <b>대차평균(차변=대변)과 근거 인용</b>을 결정론으로 검증하는 예제입니다. <span class="lim">범위는 대차평균과 근거 대조까지이고, 전체 분개 검증과 연결조정 자동화는 다음 과제로 남겨 두었습니다.</span></span></div>
     <div class="metrics"><span class="metric">npm v0.20.0 라이브</span><span class="metric">TS 소스 1.5만 줄</span><span class="metric">208 커밋</span><span class="metric">테스트 파일 67 · 단언 400+</span><span class="metric">MIT</span></div>
     <div class="proof"><span class="verified">✓ 검증 가능</span> &nbsp;<a href="https://www.npmjs.com/package/@promptia-labs/agent-receipt">npm @promptia-labs/agent-receipt</a> · <a href="https://github.com/koscom2023-beep/agent-receipt">GitHub</a> · <a href="https://receipt.promptia.kr">receipt.promptia.kr</a></div>
   </div>
@@ -220,30 +220,30 @@ footer .name{color:var(--ink);font-weight:600}
 
   <div class="item">
     <div class="top"><h3>promptia Studio</h3><span class="kind">작가용 AI 집필 스튜디오 · 장편 연재 파이프라인 · promptia.kr 내 라이브</span></div>
-    <div class="row"><span class="k">문제</span><span class="v">AI는 한 화는 그럴듯하게 쓰지만 <b>100화는 못 갑니다</b>, 회차가 쌓일수록 인물이 뒤틀리고, 죽은 인물이 걸어 나오고, 설정과 문체가 무너집니다.</span></div>
+    <div class="row"><span class="k">문제</span><span class="v">AI는 한 화는 그럴듯하게 쓰지만 <b>100화는 못 갑니다</b>. 회차가 쌓일수록 인물이 뒤틀리고, 죽은 인물이 걸어 나오고, 설정과 문체가 무너집니다.</span></div>
     <div class="row"><span class="k">만든 것</span><span class="v">회차 단위 집필 파이프라인 <b>기획→정본(canon) 승인→아웃라인→초고→윤문→발행</b>. 매 화에 <b>연속성 3종</b>(직전 요약·인물 명부·끝 300자)을 주입하고, <b>품질 게이트 5종+부분 보수</b>가 미달 화를 자동 수리. 연재 시장 특화 문체 엔진과 <b>교차모델 best-of-2</b>(두 모델이 같은 화를 쓰고 결정론 채점으로 자동 선택), 화마다 남는 <b>생성 영수증</b>(어느 단계가 무엇을 넣고 검사했나)까지.</span></div>
     <div class="row"><span class="k">기능<br>(발췌)</span><span class="v"><b>기획·구상</b>: 브레인스토밍·블루프린트·가치 앵커·아키타입 추출·AI 자문. <b>정본 관리</b>: 인물 코덱스·별칭 정리·세계관 시그니처·정본 승인 리뷰. <b>집필</b>: 배치 체인(재시도·회차 계약 준수 검사)·작가 문체 시그니처 주입·best-of-N 자동 선택. <b>품질 게이트</b>: 일관성·반복 드리프트·리듬 드리프트·인물 행동 검증·아크 감사·A/B 평가·전후 품질 비교. <b>자동 수리</b>: 자동 보수·재작성 제안·잘림 재작성·재윤문(+되돌리기). <b>연속성</b>: 복선 동기화·경계 브릿지·회상 상태. <b>관측</b>: 독자 라벨 자동화·모티프 원장·인물 벤치·측정 대시보드. 전부 실제 라우트·모듈명 기준 발췌이고, 전량은 저장소가 증명합니다.</span></div>
-    <div class="row"><span class="k">운영</span><span class="v">실제 장편을 이 스튜디오로 생성·연재하며 스스로 씁니다(dogfood), 거기서 나온 실패를 <b>7대 결함 유형</b>으로 정의해 엔진에 되먹이는 루프. <span class="lim">품질의 최종 판정은 독자와 시장의 몫, 게이트는 미달을 거를 뿐입니다.</span></span></div>
+    <div class="row"><span class="k">운영</span><span class="v">실제 장편을 이 스튜디오로 생성·연재하며 스스로 씁니다(dogfood). 거기서 나온 실패를 <b>7대 결함 유형</b>으로 정의해 엔진에 되먹입니다. <span class="lim">품질의 최종 판정은 독자와 시장의 몫, 게이트는 미달을 거를 뿐입니다.</span></span></div>
     <div class="metrics"><span class="metric">API 라우트 193종 · 기능 모듈 867개(실측)</span><span class="metric">스튜디오 트리 26만+ 줄</span><span class="metric">파이프라인 4단계 · 게이트 5종</span><span class="metric">연속성 3종 주입</span><span class="metric">교차모델 best-of-2</span><span class="metric">화별 생성 영수증</span></div>
     <div class="proof"><span class="verified">✓ 라이브</span> &nbsp;promptia.kr (스튜디오)</div>
   </div>
 
   <div class="item">
     <div class="top"><h3>promptia Creator</h3><span class="kind">유튜브 크리에이터 AI 비서 · 기획→대본→분석 루프 · promptia.kr 내 라이브</span></div>
-    <div class="row"><span class="k">문제</span><span class="v">유튜버는 매주 같은 루프에 갇힙니다, <b>뭘 찍지(기획) → 대본 → 썸네일·제목 → 올리고 나면 왜 터졌는지/안 터졌는지 모름</b>. 경쟁 채널은 늘 나보다 빨라 보입니다.</span></div>
-    <div class="row"><span class="k">만든 것</span><span class="v">그 루프 전체를 API 59종으로: <b>주간 편성(weekly-slate)→촬영 단위(shoot-unit) 확정</b> 운영 루프 · <b>대본 생성기+8종 정밀 도구</b>(섹션 재생성/확장/변환·비판·교정·낭독 시뮬레이션·AI티 검출) · <b>경쟁·바이럴 분석</b>(경쟁 채널 추적·watchlist·키워드 리서치) · <b>내 채널 학습</b>, 업로드 영상 자막을 동기화·임베딩하고 <b>내 말투를 학습</b>(voice-learn·인터뷰)해 대본이 남의 목소리가 아니게 · 썸네일 실험·제목/훅 후보 · 팩트체크 · cron 자동 평가와 <b>회고(post-mortem) 자동 생성</b>까지.</span></div>
-    <div class="row"><span class="k">운영</span><span class="v">구독제(Creator Pass)·일일 AI 비용 가드·정산까지 갖춘 <b>과금 실배선 제품</b>. <span class="lim">조회수를 보장하지 않습니다, 반복 노동을 시스템으로 바꿀 뿐, 터뜨리는 건 크리에이터의 몫.</span></span></div>
+    <div class="row"><span class="k">문제</span><span class="v">유튜버는 매주 같은 루프에 갇힙니다. <b>뭘 찍을지 정하고, 대본을 쓰고, 썸네일과 제목을 만들고, 올리고 나면 정작 왜 터졌는지 모릅니다</b>. 경쟁 채널은 늘 나보다 빨라 보입니다.</span></div>
+    <div class="row"><span class="k">만든 것</span><span class="v">그 루프 전체를 API 59종으로: <b>주간 편성(weekly-slate)→촬영 단위(shoot-unit) 확정</b> 운영 루프 · <b>대본 생성기+8종 정밀 도구</b>(섹션 재생성/확장/변환·비판·교정·낭독 시뮬레이션·AI티 검출) · <b>경쟁·바이럴 분석</b>(경쟁 채널 추적·watchlist·키워드 리서치) · <b>내 채널 학습</b>: 업로드 영상 자막을 동기화·임베딩하고 <b>내 말투까지 학습</b>(voice-learn·인터뷰)해 대본이 남의 목소리가 되지 않게 합니다 · 썸네일 실험·제목/훅 후보 · 팩트체크 · cron 자동 평가와 <b>회고(post-mortem) 자동 생성</b>까지.</span></div>
+    <div class="row"><span class="k">운영</span><span class="v">구독제(Creator Pass)·일일 AI 비용 가드·정산까지 갖춘 <b>과금까지 실제로 붙인 제품</b>. <span class="lim">조회수를 보장하지는 않습니다. 반복 노동을 시스템으로 바꿀 뿐, 터뜨리는 것은 크리에이터의 몫입니다.</span></span></div>
     <div class="metrics"><span class="metric">코드 6.2만+ 줄 · 309파일(실측)</span><span class="metric">API 라우트 59종</span><span class="metric">주간 편성→촬영단위 루프</span><span class="metric">말투 학습(voice-learn)</span><span class="metric">경쟁·바이럴 분석</span></div>
     <div class="proof"><span class="verified">✓ 라이브</span> &nbsp;promptia.kr (Creator)</div>
   </div>
 
   <div class="item">
     <div class="top"><h3>thesis-ledger, “너의 돈을 지켜”</h3><span class="kind">공시 채굴·밸류에이션 · 라이브</span></div>
-    <div class="row"><span class="k">문제</span><span class="v">투자 판단의 근거를 어떻게 <b>기록하고 나중에 검증</b>할 것인가, 재무·회계 도메인에 검증 개념을 얹은 실험.</span></div>
+    <div class="row"><span class="k">문제</span><span class="v">투자 판단의 근거를 어떻게 <b>기록하고 나중에 검증</b>할 것인가. 이 질문에 재무·회계 도메인으로 답해 본 실험입니다.</span></div>
     <div class="row"><span class="k">채굴</span><span class="v"><b>실제 공시를 긁어 사실로 만듭니다.</b> 금융감독원 <b>DART</b>와 미국 <b>SEC EDGAR</b>에서 원문 재무제표를 수집해 IFRS·US-GAAP <b>9개 지표로 표준화</b>하고, <b>정정공시를 결정론 diff</b>로 잡아 전·후 delta를 남기며, <b>reverse-DCF</b>로 시장이 내재한 성장률을 역산합니다. 예측이 아니라 <b>재현 가능한 숫자</b>가 결과물입니다.</span></div>
     <div class="row"><span class="k">통제</span><span class="v">무자격 투자자문을 원천 차단하는 <b>fail-closed 게이트</b>(금칙어 린터·"매수하라" 금지)와 결정론 백테스트. <span class="lim">약한 예측 모델은 정직하게 “출시 안 함”으로 남겨 둡니다.</span></span></div>
     <div class="metrics"><span class="metric">DART · SEC EDGAR</span><span class="metric">IFRS/US-GAAP 9지표</span><span class="metric">정정공시 diff</span><span class="metric">reverse-DCF</span><span class="metric">~2만 줄 · 51 커밋</span></div>
-    <div class="proof"><span class="verified">✓ 라이브</span> &nbsp;데모는 면접 시 제시</div>
+    <div class="proof"><span class="verified">✓ 라이브</span></div>
   </div>
 </section>
 
@@ -270,7 +270,7 @@ footer .name{color:var(--ink);font-weight:600}
     <div class="lr"><div class="ll">L4 컴플·분석<br>읽기 전용</div><div class="chips"><span class="ch">controls +crosswalk(EU AI Act·SOC2·ISO42001)</span><span class="ch">cost: 왜 비쌌나 분해·모델치환 감사</span><span class="ch">insights</span><span class="ch">risk</span><span class="ch">audit-pack</span><span class="ch">attest(in-toto)</span></div></div>
     <div class="tr" style="margin-top:14px">Verification 트랙 <small>· 주장·근거 검증 · git 무관 · 별개 영수증 종류</small></div>
     <div class="lr"><div class="ll">입력</div><div class="chips"><span class="ch">research verify(--fetch·--decompose)</span><span class="ch">council verify(+DecisionLog)</span><span class="ch">bench: 검사기 자신을 측정(정밀·재현율·N회 재현성)</span><span class="ch">gen-claim LLM 분해 브릿지(호출 0)</span></div></div>
-    <div class="lr"><div class="ll">커널</div><div class="chips"><span class="ch">evaluateClaim 결정론 15종: 인용·수치·범위·날짜·링크·해시·서명·커밋·파일변경·diff·스키마·버전·파일·영수증·산출물</span><span class="ch">증거등급 A/B/C+보류(사람말 병기)</span><span class="ch">claimFingerprint 시간축 키</span></div></div>
+    <div class="lr"><div class="ll">커널</div><div class="chips"><span class="ch">evaluateClaim 결정론 15종</span><span class="ch">인용·수치·범위·날짜·링크·해시·서명·커밋·파일변경·diff·스키마·버전·파일·영수증·산출물</span><span class="ch">증거등급 A/B/C+보류(사람말 병기)</span><span class="ch">claimFingerprint 시간축 키</span></div></div>
     <div class="lr"><div class="ll">영수증·집행</div><div class="chips"><span class="ch">Verification Receipt(verified/reported 분리·결정론 receiptId)</span><span class="ch">replay 변조 재검증</span><span class="ch">predicate --sign(in-toto·오프라인 DSSE)</span><span class="ch">otel 방출</span><span class="ch">gate: 실패=행위 중단</span></div></div>
     <div class="lr"><div class="ll">Evidence<br>Graph</div><div class="chips"><span class="ch">query</span><span class="ch">view(Failure-first 브라우저)</span><span class="ch">failures triage</span><span class="ch">diff 회귀 게이트</span><span class="ch">history 시간축</span><span class="ch">subjects 상태판</span></div></div>
     <div class="inv">설계 불변식: 새 필드=해시 제외(byte-invariant) · 판정=게이트(숫자 점수 금지, 테스트가 강제) · 자가보고엔 항상 라벨 · 로컬 전용(no-cloud) · 명령 약 70개는 이 객체들을 조작하는 동사일 뿐</div>
@@ -297,19 +297,19 @@ footer .name{color:var(--ink);font-weight:600}
   <h2>AI 산출물을 결정론으로 감사한다.</h2>
   <p class="lede">생성형 AI 도입의 핵심 리스크는 "모델이 만든 숫자·인용을 믿어도 되는가"입니다. 저는 이를 <b>LLM에게 되묻지 않고</b> 산술·문자열·암호 대조로 pass/fail 판정하는 통제 커널로 풀었습니다.</p>
   <div class="grid">
-    <div class="c"><b>결정론 검증 커널 (15종)</b><p>재계산(Recalculation)·인용대사(Vouching)·범위·해시/서명을 순수함수 15종으로. 같은 입력이면 어느 감사인이든 <b>재수행 가능</b>. <span class="lim">근거의 정합만 검증, 결론의 진위는 감사인 몫으로 코드에 명시.</span></p><div class="metrics"><span class="metric">커널 테스트 90건 pass</span></div></div>
+    <div class="c"><b>결정론 검증 커널 (15종)</b><p>재계산(Recalculation)·인용대사(Vouching)·범위·해시/서명을 순수함수 15종으로. 같은 입력이면 어느 감사인이든 <b>재수행 가능</b>. <span class="lim">근거의 정합만 검증하고, 결론의 진위는 감사인의 몫이라고 코드에 명시했습니다.</span></p><div class="metrics"><span class="metric">커널 테스트 90건 pass</span></div></div>
     <div class="c"><b>증거 위계를 자료구조로</b><p>실제 계산·대조한 것(<b>verified</b>)과 자가보고(<b>reported</b>)를 분리해, 자가보고가 검증된 사실로 세탁되지 않게 강제. 감사 증거 위계의 코드화.</p><div class="metrics"><span class="metric">verified / reported 2계층</span></div></div>
     <div class="c"><b>변조탐지 감사추적</b><p>sha256 append-only 해시체인 + Sigstore Rekor 외부 봉인. 한 글자만 바뀌어도 재계산 불일치로 즉시 검출. <span class="lim">로컬 체인의 우회가능성은 인정하고, 강한 보증은 외부 로그에 위임.</span></p><div class="metrics"><span class="metric">exit 1 실증 · Rekor</span><span class="metric">WORM 7년</span></div></div>
-    <div class="c"><div class="ch"><b>AI 코딩 에이전트 감사</b><span class="tag">v0.20</span></div><p>Cursor·Claude Code·Copilot이 "이 커밋으로 이 파일을 고쳤다"고 <b>보고한 내용을 실제 git 이력과 대조</b>. 허용 범위 밖 수정·존재하지 않는 커밋(환각)을 <code>commit</code>·<code>fileChanged</code>·<code>diffContains</code> 검사로 잡아 커밋 전 <code>exit 1</code>로 반려하고, 위험 경로 쓰기·임의 <code>push/publish</code>류 행위는 실행 전에 차단(opt-in). 세션은 4값 판정으로 닫히고, 검토(승인/반려)가 기록으로 남아 리뷰어는 <b>10초 요약 증거 페이지</b>부터 읽습니다. <span class="lim">git·주장의 정합만 봅니다, 코드 품질·보안은 린트·리뷰의 몫.</span></p><div class="metrics"><span class="metric">변경통제 · 발생 어사션</span><span class="metric">PreToolUse 예방통제</span></div></div>
+    <div class="c"><div class="ch"><b>AI 코딩 에이전트 감사</b><span class="tag">v0.20</span></div><p>Cursor·Claude Code·Copilot이 "이 커밋으로 이 파일을 고쳤다"고 <b>보고한 내용을 실제 git 이력과 대조</b>. 허용 범위 밖 수정·존재하지 않는 커밋(환각)을 <code>commit</code>·<code>fileChanged</code>·<code>diffContains</code> 검사로 잡아 커밋 전 <code>exit 1</code>로 반려하고, 위험 경로 쓰기·임의 <code>push/publish</code>류 행위는 실행 전에 차단(opt-in). 세션은 4값 판정으로 닫히고, 검토(승인/반려)가 기록으로 남아 리뷰어는 <b>10초 요약 증거 페이지</b>부터 읽습니다. <span class="lim">git과 주장의 정합만 봅니다. 코드 품질과 보안은 린트·리뷰의 몫입니다.</span></p><div class="metrics"><span class="metric">변경통제 · 발생 어사션</span><span class="metric">PreToolUse 예방통제</span></div></div>
   </div>
 </section>
 
 <section>
   <div class="eyebrow">핵심 역량 2 · Finance Engineering</div>
   <h2>회계 지식을 슬라이드가 아니라 동작하는 통제로.</h2>
-  <p class="lede">회계 수험에서 배운 원칙, 복식부기, 보수주의, 통제, 규제, 을 실제 프로덕션 코드로 구현했습니다.</p>
+  <p class="lede">회계 수험에서 배운 원칙(복식부기·보수주의·통제·규제)을 실제 프로덕션 코드로 구현했습니다.</p>
   <div class="grid">
-    <div class="c"><b>복식부기형 포인트 원장</b><p>Postgres RPC로 행잠금 원자차감·거래별 러닝밸런스·무결성 재조정 함수·멱등 처리. 앱 11개 지점 실배선. <span class="lim">정합·무결성 통제(위·변조 방지는 아님).</span></p><div class="metrics"><span class="metric">FOR UPDATE · 11지점</span></div></div>
+    <div class="c"><b>복식부기형 포인트 원장</b><p>Postgres RPC로 행잠금 원자차감·거래별 러닝밸런스·무결성 재조정 함수·멱등 처리. 앱 11개 지점에 실제로 연결했습니다. <span class="lim">정합·무결성 통제(위·변조 방지는 아님).</span></p><div class="metrics"><span class="metric">FOR UPDATE · 11지점</span></div></div>
     <div class="c"><b>보수주의 원가계상</b><p>미등록 단가를 가짜 0원이 아닌 <b>null(모름)</b>로 남겨 장부 오염을 차단. 캐시 손익분기(52.6%)를 실측(8~31% 미달)으로 검증해 정책 재조정.</p><div class="metrics"><span class="metric">null-not-zero · 손익분기 실측</span></div></div>
     <div class="c"><b>DART · SEC EDGAR 파이프라인</b><p>한·미 이중시장 재무데이터를 IFRS/US-GAAP 9지표로 표준화, 정정공시를 결정론 delta로 탐지(분석적 검토절차와 동형).</p><div class="metrics"><span class="metric">2개 시장 · 정정공시 diff</span></div></div>
     <div class="c"><b>결제 무결성 통제</b><p>서버가 클라이언트 금액을 신뢰하지 않고 DB 금액만 PG에 승인요청. CAS 상태머신 + 멱등키로 이중충전 차단.</p><div class="metrics"><span class="metric">CAS · 멱등키</span></div></div>
@@ -320,12 +320,12 @@ footer .name{color:var(--ink);font-weight:600}
 <section>
   <div class="eyebrow">차별점</div>
   <h2>AI를 ‘쓰는’ 게 아니라 ‘다루는 방법’을 만들었습니다.</h2>
-  <p class="lede">대부분은 AI에게 ‘물어봅니다’. 저는 AI를 ‘운영’합니다, 남의 프롬프트가 1단계라면, 제 파이프라인은 <b>검증·자기감사까지 7단계</b>입니다.</p>
+  <p class="lede">대부분은 AI에게 ‘물어봅니다’. 저는 AI를 ‘운영’합니다. 남의 프롬프트가 1단계라면 제 파이프라인은 <b>검증·자기감사까지 7단계</b>입니다.</p>
   <div class="rungs">
-    <div class="rung"><span class="n mono">1</span><span class="t"><b>단순 프롬프팅</b> <span>, 물어보고 받아 쓰기.</span></span></div>
-    <div class="rung"><span class="n mono">2</span><span class="t"><b>오케스트레이션</b> <span>, 에이전트·RAG·품질 게이트로 규모 있는 작업을 설계(promptia).</span></span></div>
-    <div class="rung"><span class="n mono">3</span><span class="t"><b>검증</b> <span>, "AI 출력을 못 믿겠다"에서 멈추지 않고 결정론적 검증 인프라를 구축(agent-receipt).</span></span></div>
-    <div class="rung"><span class="n mono">4</span><span class="t"><b>운영 규율</b> <span>, 14인 전문가 회의(정반합·악마의 대변자)로 설계를 결정하고, 다단계 파이프라인(<code>/ship</code>·<code>/loop-ship</code>)으로 무인 개발을 돌리고, 만든 도구로 내 작업을 스스로 감사하고, 모든 결론을 바이트 단위로 확인.</span></span></div>
+    <div class="rung"><span class="n mono">1</span><span class="t"><b>단순 프롬프팅</b> <span>: 물어보고 받아쓰기.</span></span></div>
+    <div class="rung"><span class="n mono">2</span><span class="t"><b>오케스트레이션</b> <span>: 에이전트·RAG·품질 게이트로 규모 있는 작업을 설계합니다(promptia).</span></span></div>
+    <div class="rung"><span class="n mono">3</span><span class="t"><b>검증</b> <span>: "AI 출력을 못 믿겠다"에서 멈추지 않고 결정론 검증 인프라를 만듭니다(agent-receipt).</span></span></div>
+    <div class="rung"><span class="n mono">4</span><span class="t"><b>운영 규율</b> <span>: 14인 전문가 회의(정반합·악마의 대변자)로 설계를 결정하고, 다단계 파이프라인(<code>/ship</code>·<code>/loop-ship</code>)으로 무인 개발을 돌리고, 만든 도구로 제 작업을 스스로 감사하고, 모든 결론을 바이트 단위로 확인합니다.</span></span></div>
   </div>
   <p class="narr" style="margin-top:18px">‘하네스 엔지니어링’이라는 말을 알기 전부터 저는 이미 다단계 오케스트레이션으로 AI를 돌리고 있었습니다. 남들의 프롬프트가 1단계라면 제 <code>/ship</code>·<code>/loop-ship</code>은 7단계입니다. 여기에 <b>주기적 감사·검토, AI 부채·기술 부채 관리, 단일 정본(SSOT) 문서 체계</b>까지 얹어, AI를 오래·크게 굴려도 무너지지 않게 운영합니다.</p>
 </section>
@@ -335,20 +335,20 @@ footer .name{color:var(--ink);font-weight:600}
   <h2>이들이 만드는 영역에, 이미 들어가 있습니다.</h2>
   <p class="lede">Big4 AI 조직의 관심사(AI 거버넌스 · Finance · DocumentAI · RAG/LLM Agent) 기준으로 정직하게 대조했습니다.</p>
   <div style="overflow-x:auto"><table class="tbl">
-    <tr><td class="a">AI 거버넌스 ·<br>Agentic AI 운영</td><td class="b">삼정KPMG AI Summit 2026의 핵심 주제. 에이전트가 스스로 판단·실행하는 시대의 운영·통제가 agent-receipt의 정체성, AI 행위를 예방·탐지·증적으로 통제·감사. 멀티에이전트 운영 규율(회의·자율 루프·자기 감사)까지 실제로 굴려봤다.</td></tr>
+    <tr><td class="a">AI 거버넌스 ·<br>Agentic AI 운영</td><td class="b">삼정KPMG AI Summit 2026의 핵심 주제. 에이전트가 스스로 판단·실행하는 시대의 운영·통제가 agent-receipt의 정체성입니다. AI 행위를 예방·탐지·증적의 세 층으로 통제하고 감사하며, 멀티에이전트 운영 규율(회의·자율 루프·자기 감사)까지 실제로 굴려 봤습니다.</td></tr>
     <tr><td class="a">Finance</td><td class="b"><b>가장 강한 도메인.</b> 공인회계사 2차 4과목의 회계 깊이를 슬라이드가 아니라 동작하는 코드로 옮겼습니다, AI가 만든 분개의 <b>대차평균·근거 인용</b>을 결정론으로 검증하고, DART·SEC EDGAR 한·미 공시를 9개 지표로 표준화합니다. 회계를 ‘아는’ 데서 그치지 않고 ‘구현하는’ 사람입니다.</td></tr>
     <tr><td class="a">DocumentAI</td><td class="b">문서·보고서에서 뽑은 인용·수치·근거가 출처와 맞는지 결정론으로 대조. 문서 이해를 내부통제·감사증적으로 연결. <span class="mono" style="color:var(--faint)">(OCR/레이아웃 아님, 근거 대조 층)</span></td></tr>
     <tr><td class="a">NLP · LLM ·<br>Advanced RAG</td><td class="b">promptia.kr, 멀티에이전트 오케스트레이션·RAG·품질게이트·5티어 라우팅을 갖춘 라이브 AI 플랫폼(TS/TSX 소스 69만+ 줄·4,874파일)을 혼자 설계·운영. 그 위의 Studio(집필·26만+ 줄)와 Creator(유튜브 AI 비서·6.2만+ 줄)까지.</td></tr>
     <tr><td class="a">애자일 · 풀스택 ·<br>PoC/MVP</td><td class="b">기획→설계→배포→운영 완주(라이브 서비스·npm·SDK). 정규직 신사업기획 조직 경험.</td></tr>
     <tr><td class="a">협업 · 리더십</td><td class="b">프랑스인이 포함된 <b>6인 다국적 프로젝트를 팀장</b>으로 이끌며 DB 설계를 주도했고, 메가스터디 계열 <b>신사업기획 정규직</b>으로 ‘무엇을 왜 만드는가’를 사업 관점에서 배웠습니다. 혼자 끝까지 만들 줄도, 팀으로 이끌 줄도 압니다.</td></tr>
-    <tr><td class="a">Vision · 멀티모달 ·<br>파인튜닝</td><td class="b" style="color:var(--muted)">팀의 전문 영역이고, 지금 제 강점은 아닙니다, 실무 결과가 없어 강점으로 포장하지 않습니다. 다만 회계 수험생이 반년 만에 제품 다섯 개를 혼자 프로덕션까지 끌고 간 <b>학습 속도</b>가, 새 영역에도 그대로 적용됩니다.</td></tr>
+    <tr><td class="a">Vision · 멀티모달 ·<br>파인튜닝</td><td class="b" style="color:var(--muted)">팀의 전문 영역이고 지금 제 강점은 아닙니다. 실무 결과가 없어 강점으로 포장하지 않습니다. 다만 회계 수험생이 반년 만에 제품 다섯 개를 혼자 프로덕션까지 끌고 간 <b>학습 속도</b>가, 새 영역에도 그대로 적용됩니다.</td></tr>
   </table></div>
 </section>
 
 <section>
   <div class="eyebrow">입사 후</div>
   <h2>만드는 건 증명했습니다. 다음은 고객의 현장입니다.</h2>
-  <p class="narr">지난 반년, 저는 ‘AI를 신뢰할 수 있게 다루는 법’을 다섯 개의 실제 제품으로 증명했습니다. 하지만 혼자 만든 도구는 혼자의 문제를 풉니다. <b>AI 거버넌스와 AI 시대의 내부통제</b>가 본격화되는 지금, 제 통제·검증 인프라를 실제 기업의 감사·재무·컴플라이언스 문제에 붙여 보고 싶습니다. <b>회계를 아는 눈, AI를 다루는 손, 근거로 검증하는 습관</b>, 이 셋을 팀의 무기로 보태고, 현장에서만 배울 수 있는 것을 배우겠습니다. 저는 배우러 가는 신입이 아니라, <b>이미 다섯 번 끝까지 만들어 본 신입</b>으로 시작하겠습니다.</p>
+  <p class="narr">지난 반년, 저는 ‘AI를 신뢰할 수 있게 다루는 법’을 다섯 개의 실제 제품으로 증명했습니다. 하지만 혼자 만든 도구는 혼자의 문제를 풉니다. <b>AI 거버넌스와 AI 시대의 내부통제</b>가 본격화되는 지금, 제 통제·검증 인프라를 실제 기업의 감사·재무·컴플라이언스 문제에 붙여 보고 싶습니다. <b>회계를 아는 눈과 AI를 다루는 손, 근거로 검증하는 습관</b>을 팀의 무기로 보태고, 현장에서만 배울 수 있는 것을 배우겠습니다. 저는 배우러 가는 신입이 아니라, <b>이미 다섯 번 끝까지 만들어 본 신입</b>으로 시작하겠습니다.</p>
 </section>
 
 <footer>
